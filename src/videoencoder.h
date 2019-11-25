@@ -1,5 +1,5 @@
-#ifndef MULTIIMAGEFILTER_H
-#define MULTIIMAGEFILTER_H
+#ifndef VIDEO_ENCODER_H
+#define VIDEO_ENCODER_H
 
 #include "../../IncludeSpdlog/spdlog.h"
 #include "encoder.h"
@@ -25,12 +25,12 @@ class VideoEncoder
   ~VideoEncoder();
 
   void configure(QJsonObject const &m_filter);
-  void process(cv::Mat &a_image);
+  void process(cv::Mat &a_image,cv::Mat &a_gt,cv::Mat &a_pre,cv::Mat &a_post);
   double getElapsedTimeSubtractor();
 
  private:
-  BaseEncoder * m_baseEncoder{};
+  BaseEncoder * m_baseEncoder;
   cv::TickMeter m_timer;
 };
 
-#endif // MULTIIMAGEFILTER_H
+#endif // VIDEO_ENCODER_H

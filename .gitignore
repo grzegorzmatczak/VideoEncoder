@@ -48,3 +48,4 @@ build/CMakeFiles/VideoEncoder_autogen.dir/ParseCache.txt
 build/CMakeFiles/VideoEncoder_autogen.dir/progress.make
 build/VideoEncoder_autogen/moc_predefs.h
 build/VideoEncoder_autogen/mocs_compilation.cpp
+.vscode/c_cpp_properties.json

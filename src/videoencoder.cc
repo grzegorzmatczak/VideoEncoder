@@ -2,46 +2,40 @@
 
 constexpr auto FILTER_NAME{ "Name" };
 
-VideoEncoder::VideoEncoder(QJsonObject const &m_filter)
+VideoEncoder::VideoEncoder(QJsonObject const &a_config)
 {
-  m_baseFilter = new Filter::None{};
-  configure(m_filter);
+   H_Logger->trace("VideoEncoder::VideoEncoder()");
+  m_baseEncoder = new Encoder::None();
 }
 
 VideoEncoder::~VideoEncoder()
 {
-  delete m_baseFilter;
+  delete m_baseEncoder;
 }
 
-void VideoEncoder::configure(QJsonObject const &m_filter)
+void VideoEncoder::configure(QJsonObject const &a_config)
 {
   H_Logger->trace("VideoEncoder::configure()");
-  auto const NAME_STRING{ m_filter[FILTER_NAME].toString().toStdString() };
-  H_Logger->trace("filter type: {}", NAME_STRING);
+  auto const NAME_STRING{ a_config[FILTER_NAME].toString().toStdString() };
+  H_Logger->trace("encoder type: {}", NAME_STRING);
   auto const NAME_SID{ SID(NAME_STRING.c_str()) };
-
-  //delete m_baseFilter;
+  delete m_baseEncoder;
   m_timer.reset();
   
 
   switch (NAME_SID)
   {
-    case SID("GaussianBlur"): m_baseFilter = new Filter::GaussianBlur{ m_filter }; break;
-    case SID("Color"): m_baseFilter = new Filter::Color{ m_filter }; break;
-    case SID("Resize"): m_baseFilter = new Filter::Resize{ m_filter }; break;
-    case SID("Threshold"): m_baseFilter = new Filter::Threshold{ m_filter }; break;
-    case SID("MedianBlur"): m_baseFilter = new Filter::MedianBlur{ m_filter }; break;
-    case SID("MorphologyOperation"): m_baseFilter = new Filter::MorphologyOperation{ m_filter }; break;
-    case SID("None"): m_baseFilter = new Filter::None{}; break;
-    default: H_Logger->error("Unsupported filter type: {}", NAME_STRING); break;
+    case SID("Preview"): m_baseEncoder = new Encoder::Preview{ a_config }; break;
+    case SID("None"): m_baseEncoder = new Encoder::None(); break;
+    default: H_Logger->error("Unsupported encoder type: {}", NAME_STRING); break;
   }
 }
 
-void VideoEncoder::process(cv::Mat &a_image)
+void VideoEncoder::process(cv::Mat &a_image,cv::Mat &a_gt,cv::Mat &a_pre,cv::Mat &a_post)
 {
   H_Logger->trace("VideoEncoder::process(a_image)");
   m_timer.start();
-  m_baseFilter->process(a_image);
+  m_baseEncoder->process(a_image,a_gt,a_pre,a_post);
   m_timer.stop();
 }
 double VideoEncoder::getElapsedTimeSubtractor()
