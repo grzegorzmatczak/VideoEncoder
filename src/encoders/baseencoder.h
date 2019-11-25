@@ -11,5 +11,4 @@ class BaseEncoder
 
   virtual void process(cv::Mat &a_image,cv::Mat &a_gt,cv::Mat &a_pre,cv::Mat &a_post) = 0;
 };
-
 #endif // BASE_ENCODER_H
