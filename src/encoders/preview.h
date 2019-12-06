@@ -5,7 +5,7 @@
 #include <opencv2/opencv.hpp>
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
-#include "../../../IncludeSpdlog/spdlog.h"
+#include "../../../../IncludeSpdlog/spdlog.h"
 #include <QtCore>
 
 class QJsonObject;
