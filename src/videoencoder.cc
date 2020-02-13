@@ -42,3 +42,8 @@ double VideoEncoder::getElapsedTimeSubtractor()
 {
   return m_timer.getTimeMilli();
 }
+void VideoEncoder::endVideo()
+{
+   m_baseEncoder->endVideo();
+}
+

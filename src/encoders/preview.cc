@@ -40,3 +40,7 @@ void Encoder::Preview::process(cv::Mat &a_image,cv::Mat &a_gt,cv::Mat &a_pre,cv:
   cv::resize(Cat, Cat, cv::Size(static_cast<int>(m_width), static_cast<int>(m_height)), 0, 0, cv::INTER_NEAREST);
   m_videoShoal.write(Cat);
 }
+void Encoder::Preview::endVideo()
+{
+  m_videoShoal.release();
+}

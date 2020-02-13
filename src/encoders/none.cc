@@ -9,3 +9,7 @@ void Encoder::None::process(cv::Mat &a_image,cv::Mat &a_gt,cv::Mat &a_pre,cv::Ma
 {
 
 }
+
+void Encoder::None::endVideo()
+{
+}

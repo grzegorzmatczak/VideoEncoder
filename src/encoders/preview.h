@@ -16,6 +16,7 @@ class Preview : public BaseEncoder {
   Preview(QJsonObject const &a_config);
 
   void process(cv::Mat &a_image,cv::Mat &a_gt,cv::Mat &a_pre,cv::Mat &a_post);
+  void endVideo();
 
  private:
     QString m_name;
