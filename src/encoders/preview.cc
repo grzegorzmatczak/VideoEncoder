@@ -12,11 +12,13 @@ Encoder::Preview::Preview(QJsonObject const &a_config)
   m_type = a_config["Type"].toString();
   m_width = a_config["Width"].toInt();
   m_height = a_config["Height"].toInt();
-  m_videoShoal = { (m_name+m_iter+m_type).toStdString(), cv::CAP_FFMPEG, m_code, m_fps, cv::Size(m_width, m_height), true };
-  H_Logger->trace("name:{}", (m_name+m_iter+m_type).toStdString().c_str());
+  m_videoShoal = {
+    (m_name + m_iter + m_type).toStdString(), cv::CAP_FFMPEG, m_code, m_fps, cv::Size(m_width, m_height), true
+  };
+  H_Logger->trace("name:{}", (m_name + m_iter + m_type).toStdString().c_str());
 }
 
-void Encoder::Preview::process(cv::Mat &a_image,cv::Mat &a_gt,cv::Mat &a_pre,cv::Mat &a_post)
+void Encoder::Preview::process(cv::Mat &a_image, cv::Mat &a_gt, cv::Mat &a_pre, cv::Mat &a_post)
 {
   cv::Mat m_image;
   cv::Mat m_gt;
@@ -27,7 +29,6 @@ void Encoder::Preview::process(cv::Mat &a_image,cv::Mat &a_gt,cv::Mat &a_pre,cv:
   cv::cvtColor(a_gt, m_gt, cv::COLOR_GRAY2BGR);
   cv::cvtColor(a_pre, m_pre, cv::COLOR_GRAY2BGR);
   cv::cvtColor(a_post, m_post, cv::COLOR_GRAY2BGR);
-
 
   cv::Mat Cat1;
   cv::Mat Cat2;

@@ -4,7 +4,7 @@ constexpr auto FILTER_NAME{ "Name" };
 
 VideoEncoder::VideoEncoder(QJsonObject const &a_config)
 {
-   H_Logger->trace("VideoEncoder::VideoEncoder()");
+  H_Logger->trace("VideoEncoder::VideoEncoder()");
   m_baseEncoder = new Encoder::None();
 }
 
@@ -21,7 +21,6 @@ void VideoEncoder::configure(QJsonObject const &a_config)
   auto const NAME_SID{ SID(NAME_STRING.c_str()) };
   delete m_baseEncoder;
   m_timer.reset();
-  
 
   switch (NAME_SID)
   {
@@ -31,11 +30,11 @@ void VideoEncoder::configure(QJsonObject const &a_config)
   }
 }
 
-void VideoEncoder::process(cv::Mat &a_image,cv::Mat &a_gt,cv::Mat &a_pre,cv::Mat &a_post)
+void VideoEncoder::process(cv::Mat &a_image, cv::Mat &a_gt, cv::Mat &a_pre, cv::Mat &a_post)
 {
   H_Logger->trace("VideoEncoder::process(a_image)");
   m_timer.start();
-  m_baseEncoder->process(a_image,a_gt,a_pre,a_post);
+  m_baseEncoder->process(a_image, a_gt, a_pre, a_post);
   m_timer.stop();
 }
 double VideoEncoder::getElapsedTimeSubtractor()
@@ -44,6 +43,5 @@ double VideoEncoder::getElapsedTimeSubtractor()
 }
 void VideoEncoder::endVideo()
 {
-   m_baseEncoder->endVideo();
+  m_baseEncoder->endVideo();
 }
-

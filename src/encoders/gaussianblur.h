@@ -5,8 +5,10 @@
 
 class QJsonObject;
 
-namespace Filter {
-class GaussianBlur : public BaseFilter {
+namespace Filter
+{
+class GaussianBlur : public BaseFilter
+{
  public:
   GaussianBlur(QJsonObject const &a_config);
 
